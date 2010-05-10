@@ -1,0 +1,62 @@
+{% extends accounting_base %}
+
+{%block extra_scripts %}
+ <script src="/jscripts/jquery.maskedinput-1.2.2.js"></script>
+ <script type="text/javascript">    
+	$(document).ready( function(){
+	   	$(".date").mask("99/99/9999");
+	   	$(".phone").mask("(999) 999-9999");
+	   	$(".tin").mask("99-9999999");
+	   	$(".ssn").mask("999-99-9999");
+		$(".accounting_code").mask("9999")
+		$(".date").datepicker();
+	});
+</script>
+{%endblock%}
+
+{% block content %}
+<table width="450px" border="1">
+		<tr>
+		<td colspan="3" bgcolor="#0000a0">
+			<form action="{% url TransactionTypeGroupHandler %}"  method="get" accept-charset="utf-8">
+				<div>
+					
+					<div style="float:left;width:65px;padding: px">
+						<input type="text" class="accounting_code" name="Code" style="width:68px"></input>
+					</div>
+					<div style="float:left;width: 70px">
+						<input type="text" name="Description" style="width:300px"></input> 
+					</div>
+					<div style="float:right; width:50px">
+						<input type="submit" align="right" value="Save" />
+					</div>	
+				</div>
+			</form>
+		</td>
+	</tr>
+    <tr>
+        <th width="70px">
+        	Group Code
+        </th>        <th width="350px">
+        	Group Description
+        </th>
+		<th width="50px">
+			Action
+		</th>
+    </tr>
+
+	{% for gr in transaction_type_groups %}
+    <tr>
+        <td>
+        	{{gr.Code}}
+        </td>
+        <td>
+        	{{gr.Description}}
+        </td>
+		<td>
+			<a href="TransactionTypeGroup?action=delete&key={{gr.key}}">Delete</a>
+		</td>
+    </tr>
+	{%endfor%}
+</table>
+{% endblock %}

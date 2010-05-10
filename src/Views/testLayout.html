@@ -1,0 +1,55 @@
+{% extends "bases/jqueryLayout.base.html" %}
+
+{% block styles %}
+{{block.super}}
+
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+	$(function(){
+		//$('#demoContainer').mb_open();
+		$('#triger').click(function(){
+			alert('try to open');
+			$('#demoContainer').mb_close();
+		});
+	});
+	
+</script>
+{% endblock %}
+
+{% block body %}
+
+Put Something:<input type="text" id="triger" ></input>
+
+<div class="containerPlus" width="500"
+	buttons="m" style="top: 200px; left: 200px" icon="/styles/mbContainer/elements/icons/chart.png"
+	skin="stiky">
+<div class="no">
+<div class="ne">
+<div class="n">Title 1</div>
+</div>
+<div class="o">
+<div class="e">
+<div class="c">
+<div class="content">BLa bla bla
+	<br></br>
+	<input type="text">Vnesi nesto</input><br></br>
+	<input type="text">Vnesi nesto</input><br></br>
+	<input type="text">Vnesi nesto</input><br></br>
+	<input type="text">Vnesi nesto</input><br></br>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="so">
+<div class="se">
+<div class="s"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

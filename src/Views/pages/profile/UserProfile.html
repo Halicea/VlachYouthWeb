@@ -1,0 +1,70 @@
+{% extends blog_base %}
+{% block styles %}
+{{block.super}}
+<link href="/styles/css_pirobox/black/style.css" rel="stylesheet" type="text/css" media="screen" />
+{% endblock %}
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript" src="/jscripts/piroBox.1_2.js" ></script>
+<script type="text/javascript">
+$(function(){
+	$("#lnkAddNewImage").click(function(evnt){
+		evnt.preventDefault();
+		$('#divUploadImage').dialog();
+	});
+	$().piroBox({
+		my_speed: 600, //animation speed
+		bg_alpha: 0.5, //background opacity
+		radius: 4, //caption rounded corner
+		scrollImage : false, // true == image follows the page, false == image remains in the same open position
+		pirobox_next : 'piro_next', // Nav buttons -> piro_next == inside piroBox , piro_next_out == outside piroBox
+		pirobox_prev : 'piro_prev',// Nav buttons -> piro_prev == inside piroBox , piro_prev_out == outside piroBox
+		close_all : '.piro_close',// add class .piro_overlay(with comma)if you want overlay click close piroBox
+		slideShow : 'slideshow', // just delete slideshow between '' if you don't want it.
+		slideSpeed : 4 //slideshow duration in seconds(3 to 6 Recommended)
+	});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="divInfo">
+	{% if profile %}
+		{{profile.User.Name}} {{profile.User.Surname}} {{profile.UserName}}
+	{% endif %}
+</div>
+<div>
+<div id="divProfilePicture" style="float: left; padding-right: 10px">
+	<img  alt="No Profile Picure Available" src="{% url UserProfileHandler %}/Images?key={{profile.owner_profile_images.get.key}}" style="max-height: 250px; max-width: 200px"></img>
+</div>
+<div id="divImages" style="width: 800px">
+	<input type="hidden" id="hfLimit"></input>
+	<input type="hidden" id="hfOffset"></input>
+	{%ifequal profile.Owner.key current_user.key %}
+		<h3>My Pictures <a id="lnkAddNewImage" href="/profile/images?op=add&profileKey={{profile.key}}">Add New</a></h3>
+	{%endifequal%}
+	{% if profileImages %}
+	{% for image in profileImages %}
+		<div style="float: left;padding-right: 5px; padding-bottom: 5px; border: 1px"><a href="{% url UserProfileHandler %}/Images?key={{image.key}}" class="pirobox_gall" title="My Pictures" rev="{{forloop.counter}}" ><img src="{% url ProfileImagesHandler %}?key={{image.key}}&mode=thumb" style="height: 60px"></img></a></div>
+	{% endfor %}
+	{% else %}
+			<div style="float: left;padding-right: 5px; padding-bottom: 5px; border: 1px">
+				<h2 style="color: red"> Ohh, you don't have any image yet??? </h2>
+			</div>
+	{% endif %}
+</div>
+</div>
+<div style="clear: both"></div>
+<div id="divMessages">
+	<a href="{% url UserProfileHandler %}/Messages/Inbox">Inbox</a><br></br>
+	<a href="{% url UserProfileHandler %}/Messages/Sent">Sent</a><br></br>
+	<a href="{% url UserProfileHandler %}/Messages/Draft">Drafts</a><br></br>
+</div>
+<div id="divUploadImage" title="Upload Image" style="display: none;">
+	<form enctype="multipart/form-data" method="post" action="{% url UserProfileHandler %}/Images">
+		<input type="hidden" name="op" value="add"></input>
+		<input type="file" name="fileImg">
+		<input type="submit"></input>
+	</form>
+</div>
+{% endblock %}

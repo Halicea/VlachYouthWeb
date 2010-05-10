@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<style type="text/css">
+
+#top_content{ widht:100%; }
+#logo_container{ 
+	height: 100px; 
+	background-color: black;
+}
+
+</style>
+<title>
+	{% block title %} {% endblock %} 
+</title>
+{% block styles %}
+
+{%endblock%}
+{% block scripts %}
+
+{%endblock%}
+
+</head>
+{% block analitics %}
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-5724164-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+{%endblock%}
+<body style="background-color: #B6D2F1">
+<div style="width: 100%;">
+<div style="height: 1120px; width: 1000px; margin-left: auto; margin-right: auto;" class="">
+	<div id="top_content" style="padding-bottom: 10px">
+		<div id="logo_container" class="ui-corner-top">
+			{%block top_logo %}
+				Logo Should be here
+			{%endblock %}
+		</div>
+		
+		<div id="top_menu_container" style="height:37px;width: 998px; background-color: gray;" class="ui-widget-header ui-corner-bottom">
+			<div style="float: left; width: auto;">
+				{%block top_menu %} {% endblock %}
+			</div>
+			<div  id="login" style="text-align: left; width: 150px; float: right;" >
+				{% block login_menu %}
+					<form method="get" action="#">
+						{% if current_user %}
+						<label style="color: navy">{{current_user.Name}} {{current_user.Surname}} </label>
+						<a href="{% url LogoutHandler %}" style="text-align: right; color: black;">Logout</a>
+						{% else %}
+						<a href="{% url LoginHandler %}" style="text-align: right; color: black;">Login</label> </a>
+						{% endif %}
+					</form>
+				{% endblock %}
+			</div>
+		</div> 
+	</div>
+	<div id="middle_content" style="min-height: 500px;" class="ui-widget">
+		 <!-- 
+		 <div id="left_panel_container" style="float: left; width: 120px; height:100% padding: 0px; background-color: blue;">
+			{% block left_pane %}
+				left Pane
+			{% endblock %}
+		</div>
+		 -->
+		<div id="main_container" style="float: left;width: 810px; padding: 0px;">
+			{% block status %}
+				Status 
+			{% endblock %}
+			{% block content %}
+			    Main Pane
+			{% endblock %}
+		</div>
+		<div id="right_panel_container" style="float: right;width: 180px; height: 500px; padding-left: 10px;">
+			{% block sidebar %}
+			<ul>
+				<li>
+					<h2>Quote of the day</h2>
+					<p>{{quote}}</p>
+				</li>
+				<li>
+					<h2>Recent Posts</h2>
+					<ul>							
+						<li><a href="{% url PostHandler %}?PostId={{post.key}}">{{post.Title}}</a></li>		 
+						<li><a href="#">Pellentesque morbi sit veroeros</a></li>
+						<li><a href="#">Magna interdum donec pede</a></li>
+						<li><a href="#">Nisl gravida iaculis auctor vitae</a></li>
+						<li><a href="#">Bibendum sit amet mauris cras</a></li>
+						<li><a href="#">Adipiscing libero et risus donec</a></li>
+						<li><a href="#">Venenatis porttitor morbi quam</a></li>
+					</ul>
+				</li>
+			</ul>
+			{% endblock %}
+		</div>
+	</div>
+	<div style="clear: both;"></div>
+	<div id="bottom_container" style="text-align: center; width:100%">
+		{% block footer %}
+	<p><img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" 
+alt="Powered by Google App Engine" /> vlachyouth.appspot.com (c)2009. Created By Kosta Mihajlov Halicea. </p>
+		{% endblock %}
+	</div>
+</div>
+</div>
+</body>
+</html>

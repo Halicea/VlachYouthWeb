@@ -1,0 +1,27 @@
+{% extends base %}
+
+{% block content %}
+<form action="" method="get">
+	Add New: <br></br>
+	Word:<input type="text" name="value"></input><br></br>
+	Description:<input type="text" name="description"></input><br></br>
+	<input type="hidden" name="op"></input>
+	<input type="submit" value="add"></input>	
+	<table class="resultGrid">
+		{% if WordResults %}
+		{% for item in WordResults %}
+		<tr>
+			<td>
+				{{item.Value}}
+			</td>
+			<td>
+				{{item.Description}}
+			</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+			No results to display	
+		{%endif%}
+	</table>
+</form>
+{% endblock %}

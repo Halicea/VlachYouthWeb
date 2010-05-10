@@ -1,0 +1,30 @@
+{%block styles %}
+{{block.super}}
+<link href="/styles/superfish.css" rel="stylesheet" type="text/css" media="screen" />
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript" src="/jscripts/hoverIntent.js" ></script>
+<script type="text/javascript" src="/jscripts/superfish.js" ></script>
+<script language="text/javascript">
+$(document).ready(function() {
+	$('ul.sf-menu').superfish();
+});
+{% endblock %}
+</script>
+{% comment %}
+<!-- <link href="/styles/jqueryslidemenu/jqueryslidemenu.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="/jscripts/jqueryslidemenu.js" ></script>
+ -->
+{% endcomment %}
+<div id="menu" style="padding-left: 15px; margin-top: -5px;position: relative;" >
+	<ul class="sf-menu">
+	    <li><a href='{% url HomeHandler %}'>Home</a></li>
+	    <li><a href='{% url TranslateHandler %}'>Dictionary</a></li>
+		<li><a href="{% url AboutHandler %}">About</a></li>
+		<li><a href="{% url LinksHandler %}">Links</a></li>
+		<li><a href='{% url WishListHandler %}'>Wish List</a></li>
+		<li><a href="{% url ContactHandler %}">Contact</a></li>
+	</ul>
+</div>

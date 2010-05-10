@@ -1,0 +1,60 @@
+<div ui-widget ui-corner-all ui-widget-content" style="padding: 5px">
+	<div class="my-collapsible ui-widget-header ui-corner-top">
+		<a href="{% url PostHandler %}?key={{post.key}}">{{post.Title}}</a>
+	</div>
+	<div class="ui-widget-content jqeditable" style="padding:5px">
+		{{post.Entry}}
+	</div>
+	<div class="meta ui-state-disabled ui-corner-bottom" style="border-color: black; border: 1px;border-style: solid;font-size: x-small;" >
+			<p class="credit" style="float: left; padding-right: 10px">Posted by <a href="/Profile?key={{post.Creator.key}}">{{post.Creator.Name}}</a> on {{post.DateCreated|date:"y/M/d"}}</p>
+			<p class="links" > 
+			{% if current_user.IsAdmin %} 
+				<a href="{% url PostHandler %}?op=upd&key={{post.key}}">Edit</a>
+				<a href="{% url PostHandler %}?op=del&key={{post.key}}">Delete</a>
+			{% else %} 
+				{% ifequal current_user.key post.Creator.key %}
+				<a href="{% url PostHandler %}?op=upd&key={{post.key}}">Edit</a>
+				<a href="{% url PostHandler %}?op=del&key={{post.key}}">Delete</a>
+				{% endifequal %}
+			{%endif%} 
+			<a href="{% url PostHandler %}?key={{post.key}}" class="comments">Comments</a> 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Times Read {{post.TimesRead}}
+			</p>
+	</div>
+</div>
+{% comment %}
+<!-- <div class="containerPlus" style="width:100%"
+		buttons="m" icon="/styles/mbContainer/elements/icons/chart.png"
+		skin="stiky">
+	<div class="no">
+	<div class="ne">
+	<div class="n">
+			<a href="{% url PostHandler %}?key={{post.key}}">{{post.Title}}</a>
+	</div>
+	</div>
+	<div class="o">
+	<div class="e">
+	<div class="c">
+	<div class="content">
+		<div class="entry"> 
+			<p>{{post.Entry}}</p>
+		</div>
+		<div class="meta">
+			<p class="credit">Posted by <a href="/Profile?key={{post.Creator.key}}">{{post.Creator.Name}}</a> on {{post.DateCreated|date:"y/M/d"}}</p>
+			<p class="links">{%if current_user.IsAdmin %} <a href="{% url PostHandler %}?op=del&key={{post.key}}">Delete</a> {%endif%} <a href="{% url CommentHandler %}?postKey={{post.key}}" class="comments">Comments</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" class="more">Read more</a></p>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div>
+	<div class="so">
+	<div class="se">
+	<div class="s"></div>
+	</div>
+	</div>
+	</div>
+	</div>
+</div> -->
+{% endcomment %}

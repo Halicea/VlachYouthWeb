@@ -1,0 +1,20 @@
+{% extends blog_base %}
+{% block title %}Enter Personal Data( Внеси Емаил) {% endblock %}
+{% block content %}
+	<form action="{% url AddUserHandler %}" method="post">
+		<div class="ui-widget" style="margin-left:auto; width:270; margin-right: auto;">
+			<div class="ui-widget-header ui-corner-top" style="text-align: center;"> <h2>Нов Корисник</h2> </div>
+			<div class="ui-widget-content ui-corner-bottom" style="text-align:right; border-collapse: collapse; padding-right: 10px">
+				<p>Име:<input type="text" name="Name"></input> </p>
+				<p>Презиме:<input type="text" name="Surname"></input></p>
+				<p>Лозинка:<input type="password" name="Password"></input></p>
+				<p><label style="color: red;" visible="false">*</label><b>Емаил:</b> <input type="text" name="Email"></input></p>
+				<p>Известувај ме за настани<input type="checkbox" name="Notify" checked="True"/></p>
+				<p>Јавно користење на маилот<input type="checkbox" name="Public" checked="True"/></p>
+				<p><input type="submit" name="Submit" value="Потврди" class="title" style="height: 31px; color: white; font: bold;"/></p>	
+			</div>
+		</div>	
+		
+	</form>
+	
+{%endblock%}

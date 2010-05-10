@@ -1,0 +1,82 @@
+{% extends accounting_base %}
+
+{% block content %}
+
+{% if currentAccount %}
+<div width=100%>
+    <div id="divAccountLinks" style="width:150px; padding: 5px; float: left;" >
+	    <a href="{% url TransactionHandler %}?op=new&OwnerAccount={{currentAccount.key}}">
+	        <div style="border: 1px solid; width: 120px; height: 30px; text-align: center; padding: 5px; " class="ui-widget-header ui-corner-all">
+	    	New Transaction
+	    	</div>
+	    </a><br></br>
+	    <a href="{% url TransactionHandler %}?op=cash&OwnerAccount={{currentAccount.key}}">
+	    	<div style="border: 1px solid; width: 120px; min-height: 30px; text-align: center; padding: 5px;" class="ui-widget-header ui-corner-all">
+	    	New Cash Input
+	    	</div>
+	    </a><br></br>
+	    <a href="{% url TransactionHandler %}?op=search&OwnerAccount={{currentAccount.key}}">
+	    	<div style="border: 1px solid; width: 120px; min-height: 30px; text-align: center;padding: 5px;" class="ui-widget-header ui-corner-all">
+	    	New Batch
+	    	</div>
+	    </a><br></br>
+	    <a href="{% url TransactionHandler %}?op=search&OwnerAccount={{currentAccount.key}}">
+	    	<div style="border: 1px solid; width: 120px; min-height: 30px; text-align: center;padding: 5px;" class="ui-widget-header ui-corner-all">
+	    	Search
+	    	</div>
+	    </a><br></br>
+	</div>
+	
+	<div id="AccountDetails" style="width: 400px; float: left;border: thin solid; padding: 10px" class="ui-corner-all ui-widget-content">
+		<table>
+		<tr><td colspan="2"><h2>Account Details:</h2></td></tr>
+		<tr><td>Bank Name: </td><td>{{currentAccount.BankName}}</td></tr>
+		<tr><td>AccNo:</td><td>{{currentAccount.AccountNumber}}</td></tr>
+		<tr><td>Date Created:</td><td>{{currentAccount.DateCreated }}</td></tr>
+		<tr><td>Owner:</td><td>{{currentAccount.Owner.Name}} {{currentAccount.Owner.Surname}}</td></tr>
+		<tr><td>Balance:</td><td>{{currentAccount.Balance}}</td></tr>
+		{% comment %}
+		{{currentAccount.as_p}}
+		{% endcomment %}
+		</table>
+	</div>
+</div>
+<div style="clear: both"></div>
+<div id="RecentTransactions">
+	<table>
+	   <th>
+	 	 <td>Referent Account</td>
+	 	 <td>Mode</td>
+	 	 <td>Type</td>
+	 	 <td>Batch</td>
+	 	 <td>Ammount</td>
+	 	 <td>Time</td>
+	 	 <td>Verified</td>
+	   </th>
+	{% for tr in currentAccount.RecentTransactions %}
+	   <tr>
+		 <td>
+		 	{{tr.ReferentAccount.Owner.Name}} {{tr.ReferentAccount.Owner.Name}}<br></br>
+		    {{tr.ReferentAccount.AccountNumber}}
+		 </td>
+	 	 <td>{{tr.TransactionMode}}</td>
+	 	 <td>{{tr.TransactionType.Code}}</td>
+	 	 <td>{{tr.Batch.key}}</td>
+	 	 <td>{{tr.Ammount}}</td>
+	 	 <td>{{tr.TransactionTime}}</td>
+	 	 <td>{{tr.Verified}}</td>
+	   </tr>
+	{% endfor %}
+	</table>
+</div>
+<hr></hr>
+{% endif %}
+
+<div id="divAccountList" class="ui-widget">
+	{% for acc in accounts %}
+	<div class="ui-widget-header">
+		<a href="{% url AccountHandler %}?key={{acc.key}}"> AccNo:{{acc.AccountNumber}} Balance:{{acc.Balance}} Bank:{{acc.BankName}}</a> 
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

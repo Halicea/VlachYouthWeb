@@ -1,0 +1,38 @@
+<div class="containerPlus" style="width:100%"
+		buttons="m" icon="/styles/mbContainer/elements/icons/chart.png"
+		skin="white">
+	<div class="no">
+	<div class="ne">
+	<div class="n">	
+	</div>
+	</div>
+	<div class="o">
+	<div class="e">
+	<div class="c">
+	<div class="content">
+		<div class="">
+		{{comment.Entry}}
+		</div>
+		<div class="meta">
+			{% if comment.Owner %}
+			<p class="credit">Comment by <a href="/profiles?key={{comment.Creator.key}}">{{comment.Creator.Name}}</a> on {{comment.DateCreated}}</p>
+			{% else %}
+			<p class="credit">Anonymously created on {{comment.DateCreated}}</p>
+			{% endif %}
+			{% if current_user.IsAdmin %}
+			<p><a href="{% url CommentHandler %}?op=del&key={{comment.key}}">Delete</a></p>
+			{% endif %}
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div>
+	<div class="so">
+	<div class="se">
+	<div class="s"></div>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>

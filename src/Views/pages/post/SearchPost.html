@@ -1,0 +1,29 @@
+{% extends blog_base %}
+{% block script %}
+{{block.super}}
+
+{% endblock %}
+{% block content %}
+<div style="border: 1px solid; border-color: black; " class="ui-corner-all">
+<!-- 
+<div style="border-bottom: 1px solid; border-color: black; width: 100%">
+	<h2>Search:</h2>  
+</div>
+ -->
+<div style="padding: 10px; width:100%">
+<form action="" method="get">
+<input type="hidden" name="op" value="src"></input>
+Title:&nbsp;&nbsp;&nbsp;<input type="text" name="title"></input><br></br>
+From: <input type="text" class="date" name="fromDate"></input>&nbsp;&nbsp;
+To: <input type="text" class="date" name="toDate"></input><br></br>
+<input type="submit" value="Search"></input>
+</form>
+</div>
+</div>
+<hr>
+{% if posts %}
+	{% for post in posts %}
+	{% include blPost %}
+	{% endfor %}
+{% endif %}
+{% endblock %}

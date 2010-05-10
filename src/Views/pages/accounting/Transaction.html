@@ -1,0 +1,71 @@
+{% extends accounting_base %}
+{% block title %} Transaction {% endblock %}
+{% block scripts %}
+{{ block.super }}
+<script src="/jscripts/jquery.maskedinput-1.2.2.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".date").mask("99/99/9999");
+        $(".phone").mask("(999) 999-9999");
+        $(".tin").mask("99-9999999");
+        $(".ssn").mask("999-99-9999");
+        $(".accounting_code").mask("9999");
+        $(".ammount").mask("9999.99");
+        $(".datepicker").datepicker();
+    });
+</script>
+{% endblock %}
+{% block content %}
+<form action="{% url TransactionHandler %}" method="post">
+    <div>
+        <div class="title">
+            <h2>Transaction</h2>
+        </div>
+        <input type="hidden" name="OwnerAccountKey" value="{{ownerAccount.key}}" />
+        <table>
+            <th>
+                <td>Mode</td>
+                <td>Referent Account</td>
+                <td>Ammount</td>
+                <td>Description</td>
+                <td>Date</td>
+                <td>Notify the Person</td>
+                <td></td>
+            </th>
+            <tr>
+                <td>
+                    <select name="TransactionMode">
+                        <option value="debit">debit</option>
+                        <option value="credit">credit</option>
+                    </select>        
+                </td>
+                <td>
+                    <select id="selReferentAccount" name="ReferentAccountKey" style="width: 155px;">
+                        {% for user in allUsers %}
+                        <optgroup title="{{user.Name}} {{user.Surname}}">
+                            {% for acc in user.owner_accounts %}<option value="{{acc.key}}">{{acc.BankName}}</option>
+                            {% endfor %} 
+                        </optgroup>
+                        {% endfor %}
+                    </select>    
+                </td>
+                <td>
+                    <input type="text" class="ammount" name="Ammount"></input>
+                </td>
+                <td>
+                    <textarea name="Description" rows="5" cols="10" style="width: 150px;height: 100px"></textarea>
+                </td>
+                <td>
+                    <input type="text" class="date datepicker" name="TransactionTime" id="dp"></input>
+                </td>
+                <td>
+                    <input type="checkbox" name="Notify" checked="checked"/>
+                </td>
+                <td>
+                    <input type="submit" name="Submit" value="Save" class="title" style="height: 31px; color: white; font: bold;"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+{%endblock%}

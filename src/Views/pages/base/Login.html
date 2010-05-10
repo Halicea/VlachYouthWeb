@@ -1,0 +1,19 @@
+{% extends blog_base %}
+
+{% block content %}
+
+<div class="ui-widget" style="width:270px; margin-left: auto; margin-right: auto;">
+	<div class="ui-widget-header ui-corner-top"><h2>Login</h2></div>
+	<div class="ui-widget-content ui-corner-bottom" style="text-align: right; padding: 10px">
+		<form action="{% url LoginHandler %}" method="post">
+			{% if redirect_url %}
+			<input type="hidden" name="redirect_url" value="{{redirect_url}}"></input>
+			{% endif %}
+			<p>Email:<input type="text" name="Email" style="width: 170px" /></p>
+			<p>Password:<input type="password" name="Password" style="width: 170px" /></p>
+			<p><input type="submit" value="Login" /></p>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

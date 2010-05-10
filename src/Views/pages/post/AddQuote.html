@@ -1,0 +1,18 @@
+{%extends blog_base %}
+
+{%block title %} Add New Quote {%endblock%}
+{% block content %}
+<div class = "post">
+	<form target="/AddQuote">
+		<p>Quote Title:<input name="Title" class="textfield" type="text"></input></p>
+		<p>
+			Text: <br/>
+			<textarea name="QuoteText" style="height: 300;width: 300"></textarea>
+		</p>
+		<p>
+			<input type="submit" value="Save"></input>
+		</p>
+		<hr/>
+	</form>
+</div>
+{% endblock %}

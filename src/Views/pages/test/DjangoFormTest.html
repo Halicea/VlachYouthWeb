@@ -1,0 +1,12 @@
+{% extends base%}
+{%block content%}
+<form method="post">
+{{f.as_ul}}
+<input type="submit" value="Save"></input>
+</form>
+{%if m%}
+{{m.Name}}
+{%else%}
+   No Item!
+{%endif%}
+{%endblock%}

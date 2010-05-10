@@ -1,0 +1,25 @@
+{% extends accounting_base %}
+{% block content %}
+<div>
+	<div>
+		<form action="{% url FinancialCardHandler %}">
+			<p>User:
+					<select name="UserKey" style="width: 155px;">
+						<option value='0'>--Choose Card--</option>
+						{% for user in allUsers %}
+						   <option value='{{user.key}}'> {{user.Name}} {{User.Surname}}</option>
+						{% endfor %}
+					</select> 
+				<input type="submit" value="Display"></input>
+			</p>
+		</form>
+	</div>
+	<div>
+		{% include mnTransactionList %}
+	</div>
+</div>
+{% endblock %}
+
+{% block sidebar %} 
+	{% include mnAccountingSidebar %}
+{% endblock %}

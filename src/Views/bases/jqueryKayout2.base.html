@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+<HEAD>
+<TITLE>
+	{% block title %} {% endblock %} 
+</TITLE>
+{% block styles %}
+<link href="/styles/mbContainer/css/mbContainer.css" rel="stylesheet" type="text/css" media="screen" />
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/jscripts/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="/jscripts/jquery-ui-1.7.2.custom.min.js"></script>
+<script type="text/javascript" src="/jscripts/jquery.layout.js"></script>
+<script type="text/javascript" src="/jscripts/mbContainer.js"></script>
+<script type="text/javascript" src="/jscripts/jquery.panelgallery.js"></script>
+<script type="text/javascript">
+var myLayout;
+$(function(){
+	myLayout=$('body').layout({ 
+		  applyDefaultStyles: true 
+		, nort_ShowOverlapOnHover: true 
+		, north__spacing_open:	0
+		, south__spacing_open:	0
+		});
+	$(".containerPlus").buildContainers({
+		containment:"document",
+		elementsPath:"elements/"
+	});
+});
+
+</script>
+{% endblock %}
+
+</HEAD>
+<body>
+<DIV class="ui-layout-center">
+	{% block content %}
+		This is Center Block
+	{% endblock %}
+</DIV>
+<DIV class="ui-layout-north" style="height: 50px" onmouseover="myLayout.allowOverflow('north')" onmouseout="myLayout.resetOverflow(this)">
+	<div id="logo_container">
+		{%block top_logo %}
+			Logo Should be here
+		{%endblock %}
+	</div>
+	
+	<div id="top_menu_container" style="height:40px;width: 100%; background-color: gray;">
+		<div style="float: left; width: auto;">
+			{%block top_menu %} {% endblock %}
+		</div>
+		<div  id="login" style="text-align: left; width: 150px; float: right;" >
+			{% block login_menu %}
+				<form method="get" action="#">
+					{% if current_user %} 
+					<label style="color: navy">{{current_user.Name}} {{current_user.Surname}} </label>
+					<a href="{% url LogoutHandler %}" style="text-align: right; color: black;">Logout</a>
+					{% else %}
+					<a href="{% url LoginHandler %}" style="text-align: right; color: black;">Login</label> </a>
+					{% endif %}
+					<!--	
+					<fieldset>
+						<input type="text" name="q" value="search keywords" id="q" class="text" />
+						<input type="submit" value="Search" class="button" />
+					</fieldset>
+					-->
+				</form>
+			{% endblock %}
+		</div>
+	</div>
+</DIV>
+<DIV class="ui-layout-south" style="text-align: center">
+	{% block footer %}
+	<p><img src="http://code.google.com/appengine/images/appengine-silver-120x30.gif" 
+alt="Powered by Google App Engine" /> vlachyouth.appspot.com (c)2009. Created By Kosta Mihajlov Halicea. </p>
+		{% endblock %}
+</DIV>
+<DIV class="ui-layout-east">East</DIV>
+<DIV class="ui-layout-west">
+	{% block sidebar %}
+	<ul>
+		<li>
+			<h2>Quote of the day</h2>
+			<p>{{quote}}</p>
+		</li>
+		<li>
+			<h2>Recent Posts</h2>
+			<ul>							
+				<li><a href="{% url PostHandler %}?PostId={{post.key}}">{{post.Title}}</a></li>		 
+				<li><a href="#">Pellentesque morbi sit veroeros</a></li>
+				<li><a href="#">Magna interdum donec pede</a></li>
+				<li><a href="#">Nisl gravida iaculis auctor vitae</a></li>
+				<li><a href="#">Bibendum sit amet mauris cras</a></li>
+				<li><a href="#">Adipiscing libero et risus donec</a></li>
+				<li><a href="#">Venenatis porttitor morbi quam</a></li>
+			</ul>
+		</li>
+	</ul>
+	{% endblock %}
+</DIV>
+</body>
+</HTML>

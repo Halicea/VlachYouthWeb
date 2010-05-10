@@ -1,0 +1,27 @@
+<div style="" class="questionary-list my-collapsible">
+{% for qry in questionaries %}
+<form method="post">
+	<div class="questionary">
+		<input type="hidden" name="key" value="{{qry.key}}">
+		<span>{{ qry.Name }}</span>
+		<div>
+			{% for qst in qry.owner_questions %}
+			<div class="question">
+				<input type="hidden" name="{{qst.key}}" value="{{qst.QuestionType.Code}}">
+				{{forloop.counter}}. {{qst.Text}}
+				{% for opt in qst %}
+				<ol>
+				{% ifequal qst.QuestionType.Code 'multichoice' %}
+					<li><input type="checkbox" name="{{opt.key}}" value="{{opt.Text}}" {{}} /></li>
+				{% else %}
+					<li><input type="radio" group="{{qst.key}}" name="{{opt.key}}" value="{{opt.Text}}" ></li> 
+				{% endifequal %}
+				</ol>
+				{% endfor %}
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</form>
+{% endfor %}	
+</div>

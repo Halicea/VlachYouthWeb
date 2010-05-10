@@ -1,0 +1,7 @@
+1. Da se napravi galerija za stranicata
+2. Da se napravi view na skrateni postovi
+DONE: 3. Da se pokazuva kolku pati e procitano, i kolku komentari ima nekoj post
+DONE: 4. WhishList da se stavi
+4. Slikite da za sekoj profil da se sredat
+5. Da se napravi da se prebaruvaat lugje, prijateli
+6. Da se pokazuvaat koga se online

@@ -1,0 +1,47 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{% extends admin_base %}
+{% block title %} Prebaraj {% endblock %}
+
+{% block content %}
+<hr/>
+<form action="" method="get">
+<input type="text" name="search">
+<input type="submit" value="Барај">&nbsp;&nbsp;<a href="/" style="background-color: yellow;">Додади Нов Член</a>
+</form> 
+<hr/>
+<table>
+	<tr class="ResultsHeader" style="background-color: gray;border-right: thin">
+		<td>
+			Име
+		</td>
+		<td>
+			Презиме
+		</td>
+		<td>
+			Емаил
+		</td>
+		<td>
+			Прими нотификации
+		</td>
+	</tr>
+{%for user in result%}
+	<tr bordercolor="blue" class="ResultsView">
+		<td>
+			{{user.Name}}
+		</td>
+		<td>
+			{{user.Surname}}
+		</td>
+		<td>
+			{{user.Email}}
+		</td>
+		<td>
+			{{user.Notify}}
+		</td>
+	</tr>
+{%endfor%}
+
+</table>
+ 
+ {% endblock %}

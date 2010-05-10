@@ -1,0 +1,15 @@
+<div  id="login" style="text-align: left; width: 150px; float: right;" >
+	<form method="get" action="#">
+		{% if current_user %}
+		<div style="float: left; width: 120px; font-size: small;">
+			<label style="color: navy">{{current_user.Name}} {{current_user.Surname}} </label>
+			<a href="{% url LogoutHandler %}" style="text-align: right; color: black;">Logout</a>
+		</div>
+		{% else %}
+		<div style="text-align: right; padding-right: 40px; font-size: small; color: blue;">
+		<a href="{% url LoginHandler %}" style="text-align: right; color: black;">Login </a> &nbsp;&nbsp;  <a href="{% url AddUserHandler %}" style="text-align: right; color: black;">Register </a>
+		</div>
+		{% endif %}
+		
+	</form>
+</div>

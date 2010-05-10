@@ -1,0 +1,10 @@
+{% if current_user %}
+	{% if current_user.IsAdmin%}
+		{% include blAdminMenu %} 
+	{% else %}
+		{% include blLogedUserMenu %}
+	{% endif %}
+	
+{% else %}
+		{% include blDefaultMenu %}
+{% endif %}

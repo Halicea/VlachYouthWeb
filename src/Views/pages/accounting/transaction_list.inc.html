@@ -1,0 +1,61 @@
+<table border="1" width="100%">
+    <tr>
+        <th>
+            Zel
+        </th>
+        <th>
+            Dal
+        </th>
+        <th>
+            Suma
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Vreme
+        </th>
+        <th>
+            Dodadeno na
+        </th>
+        <th style="min-width: 50px;">
+            <img alt="Accepted" src="/images/ok-016x016.png" />/ <img alt="Accepted" src="/images/remove-016x016.png" />
+        </th>
+    </tr>{%for trans in transaction_results%}
+    <tr>
+        <td>
+            {% ifequal trans.TransactionMode , 'credit' %}
+            {{trans.ReferentAccount.Owner.Name}} {{trans.ReferentAccount.Owner.Surname}}
+            {% endifequal %}
+            {% ifequal trans.TransactionMode , 'debit' %}
+            {{trans.Account.Owner.Name}} {{trans.Account.Owner.Surname}}
+            {% endifequal %}
+        </td>
+        <td>
+            {% ifequal trans.TransactionMode , 'requests' %}
+            {{trans.ReferentAccount.Owner.Name}} {{trans.ReferentAccount.Owner.Surname}}
+            {% endifequal %}
+            {% ifequal trans.TransactionMode , 'owns' %}
+            {{trans.Account.Owner.Name}} {{trans.Account.Owner.Surname}}
+            {% endifequal %}
+        </td>
+        <td>
+            {{trans.Ammount}}
+        </td>
+        <td>
+            {{trans.Description}}
+        </td>
+        <td>
+            {{trans.TransactionTime|date:"y/M/d"}}
+        </td>
+        <td>
+            {{trans.EntryTime|date:"y/M/d"}}
+        </td>
+        <td align="center">
+            {% ifequal trans.VerifiedByReferentEntityStatus 'verified' %} <img alt="Accepted" src="/images/ok-016x016.png" /> {% endifequal %} 
+            {% ifequal trans.VerifiedByReferentEntityStatus 'rejected' %} <img alt="Rejected" src="/images/remove-016x016.png" /> {% endifequal %}
+            {% ifequal trans.VerifiedByReferentEntityStatus 'whaiting' %}<img alt="Rejected" src="/images/help-016x016.png" />{% endifequal %}
+            {% ifequal trans.VerifiedByReferentEntityStatus 'not_sent' %}<img alt="Rejected" src="/images/help-016x016.png" />{% endifequal %} 
+        </td>
+    </tr> {%endfor%}
+</table>

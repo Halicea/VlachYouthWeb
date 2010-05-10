@@ -1,0 +1,103 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{% extends admin_base %}
+{% block title %} Резултати од пребарување {% endblock %}
+
+{% block content %}
+	<!--  <div class="grid">
+		<div class="head_row">
+			<div class="head_column">
+				Име
+			</div >
+			<div class="head_column">
+				Презиме
+			</div >
+			<div class="head_column">	
+				Емаил
+			</div>
+			<div class="head_column">
+				Известување
+			</div>
+			<div class="head_column">
+				Додадено на
+			</div>
+		</div>
+	{%for user in result%}
+		<div class="data_row">
+			<div class="data_column">
+				{{user.Name}}
+			</div>
+			<div class="data_column">
+				{{user.Surname}}
+			</div>
+			<div class="data_column">
+				{{user.Email}}
+			</div>
+			<div class="data_column">
+				<input type="checkbox" value="{{user.Notify}}" enabled="false" align="middle"></input>
+			</div>
+			<div class="data_column">
+				{{user.DateAdded}}
+			</div>
+		</div>
+	{%endfor%}
+	</div> -->
+	<div>
+	<table border="1" width="150">
+	  <tr>
+	    <th>Име</th>
+	    <th>Презиме</th>
+	    <th>Емаил</th>
+	    <th>Додадено на</th>
+	  </tr>
+	  {%for user in result%}
+	  <tr>
+	    <td>{{user.Name}}</td>
+	    <td>{{user.Surname}}</td>
+	    <td>{{user.Email}}</td>
+        <td>{{user.DateAdded|date:"y/M/d"}}</td>
+	  </tr>
+	  {%endfor%}
+	</table>
+
+	
+	<hr/><hr/><hr/>
+	</div>
+	<!-- <div id="grid">
+		<ul>
+			<li>
+				Име
+			</li >
+			<li >
+				Презиме
+			</li >
+			<li >	
+				Емаил
+			</li>
+			<li >
+				Известување
+			</li>
+			<li>
+				Додадено на
+			</li>
+		</ul>
+	{%for user in result%}
+		<ul class="data_row">
+			<li >
+				{{user.Name}}
+			</li>
+			<li >
+				{{user.Surname}}
+			</li>
+			<li >
+				{{user.Email}}
+			</li>
+			<li >
+				<input type="checkbox" value="{{user.Notify}}" enabled="false" align="middle"></input>
+			</li>
+			<li >
+				{{user.DateAdded}}
+			</li>
+		</ul>
+	{%endfor%} -->
+	<!-- End Grid -->
+{% endblock %}

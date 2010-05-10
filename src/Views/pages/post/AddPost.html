@@ -1,0 +1,152 @@
+{%extends blog_base %}
+{% block styles %}
+{{block.super}}
+<link href="/styles/jwysiwyg/jquery.wysiwyg.css" rel="stylesheet" type="text/css" media="screen" />
+{% endblock %}
+
+{% block scripts %}
+{{block.super}}
+
+<!-- Load TinyMCE -->
+<script type="text/javascript" src="/jscripts/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$('#taEntry').tinymce({
+			// Location of TinyMCE script
+			script_url : '../jscripts/tiny_mce/tiny_mce.js',
+
+			// General options
+			theme : "advanced",
+			plugins : "safari,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
+
+			// Theme options
+			theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+			theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+			theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+			theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : true,
+
+			// Example content CSS (should be your site CSS)
+			content_css : "css/content.css",
+
+			// Drop lists for link/image/media/template dialogs
+			template_external_list_url : "lists/template_list.js",
+			external_link_list_url : "lists/link_list.js",
+			external_image_list_url : "lists/image_list.js",
+			media_external_list_url : "lists/media_list.js",
+
+			// Replace values for the template plugin
+			template_replace_values : {
+				username : "Some User",
+				staffid : "991234"
+			}
+		});
+	});
+</script>
+<!-- /TinyMCE -->
+
+
+{% comment %}
+<script type="text/javascript" src="/jscripts/jquery.wysiwyg.js" ></script>
+<script type="text/javascript">
+//Initialize the wysiwyg plugin
+$(function(){
+	  $('#taEntry').wysiwyg({
+		    controls: {
+		      strikeThrough : { visible : true },
+		      underline     : { visible : true },
+		      
+		      separator00 : { visible : true },
+		      
+		      justifyLeft   : { visible : true },
+		      justifyCenter : { visible : true },
+		      justifyRight  : { visible : true },
+		      justifyFull   : { visible : true },
+		      
+		      separator01 : { visible : true },
+		      
+		      indent  : { visible : true },
+		      outdent : { visible : true },
+		      
+		      separator02 : { visible : true },
+		      
+		      subscript   : { visible : true },
+		      superscript : { visible : true },
+		      
+		      separator03 : { visible : true },
+		      
+		      undo : { visible : true },
+		      redo : { visible : true },
+		      
+		      separator04 : { visible : true },
+		      
+		      insertOrderedList    : { visible : true },
+		      insertUnorderedList  : { visible : true },
+		      insertHorizontalRule : { visible : true },
+		      
+		      h4mozilla : { visible : true && $.browser.mozilla, className : 'h4', command : 'heading', arguments : ['h4'], tags : ['h4'], tooltip : "Header 4" },
+		      h5mozilla : { visible : true && $.browser.mozilla, className : 'h5', command : 'heading', arguments : ['h5'], tags : ['h5'], tooltip : "Header 5" },
+		      h6mozilla : { visible : true && $.browser.mozilla, className : 'h6', command : 'heading', arguments : ['h6'], tags : ['h6'], tooltip : "Header 6" },
+		      
+		      h4 : { visible : true && !( $.browser.mozilla ), className : 'h4', command : 'formatBlock', arguments : ['<H4>'], tags : ['h4'], tooltip : "Header 4" },
+		      h5 : { visible : true && !( $.browser.mozilla ), className : 'h5', command : 'formatBlock', arguments : ['<H5>'], tags : ['h5'], tooltip : "Header 5" },
+		      h6 : { visible : true && !( $.browser.mozilla ), className : 'h6', command : 'formatBlock', arguments : ['<H6>'], tags : ['h6'], tooltip : "Header 6" },
+		      
+		      separator07 : { visible : true },
+		      
+		      cut   : { visible : true },
+		      copy  : { visible : true },
+		      paste : { visible : true }
+
+		      
+		    }
+		  });
+})(jQuery);
+
+{% endcomment %}
+</script>
+{% endblock %}
+
+{% block content %}
+	<div class = "ui-widget" style="padding: 5px;">
+	<div class="ui-widget-header ui-corner-top"><h3>Create Post</h3></div>
+	<div class="ui-widget-content ui-corner-bottom">
+	<form target="" enctype="multipart/form-data"  method="post">
+		<input type="hidden" name="op" value="{% if post %}upd{% else %}add{% endif %}"></input>
+		<input type="hidden" name="key" value="{{post.key}}"></input>
+		<p>
+		Post Title:
+		<input name="title" type="text" value="{% if post %}{{post.Title}}{% endif %}" />
+		&nbsp; &nbsp;
+		Categories:
+		<select name="category" >
+			<option>History</option>
+			<option>Culture</option>
+			<option>Events</option>
+			{%for category in postCategories%}
+			<option value="{{category.key}}">{{category.Name}}</option>
+			{%endfor%}
+		</select>
+		</p>
+		
+		<p>
+			Text: <br/>
+			<textarea id="taEntry" name="entry" cols="100" rows="20" style="width: 100%">
+				{% if post %}
+					{{post.Entry}}
+				{% endif %}
+			</textarea>
+		</p>
+		<p>
+			<input type="submit" value="Save"></input> 
+			&nbsp;&nbsp;Tags(comma separated):
+			<input name="title" class="textfield" type="text" value="{% if post %}{{post.Title}}{% endif %}" />
+		</p>
+		<hr/>
+	</form>
+	</div>
+</div>
+{% endblock %}

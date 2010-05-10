@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>THREE-COLUMN LIQUID LAYOUT WITH FLOATING BOXES</title>
+<style type="text/css">
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+#header {
+  background: #0f0;
+  width: 100%;
+}
+#leftcol {
+  background: #f00;
+  float: left;
+  width: 100px;
+  height: 500px;
+}
+#rightcol {
+  background: #f00;
+  float: right;
+  width: 100px;
+  height: 500px;
+}
+#content {
+  background: #fff;
+  float: left;
+  height: 500px;
+}
+#footer {
+  background: #0f0;
+  clear: both;
+  width: 100%;
+}
+
+</style>
+</head>
+<body>
+<div id="header">
+	<div id="logo_container">Logo</div>
+	
+	<div id="top_menu_container" style="height:100px;width: 100%; background-color: gray;">
+		<div style="float: left; width: auto;">
+			{%block top_menu %} {% endblock %}
+		</div>
+		<div  id="login" style="text-align: left; width: 150px; float: right;" >
+			{% block login_menu %}
+				<form method="get" action="#">
+					{% if current_user %}
+					<label style="color: navy">{{current_user.Name}} {{current_user.Surname}} </label>
+					<a href="{% url LogoutHandler %}" style="text-align: right; color: black;">Logout</a>
+					{% else %}
+					<a href="{% url LoginHandler %}" style="text-align: right; color: black;">Login</label> </a>
+					{% endif %}
+					<!--	
+					<fieldset>
+						<input type="text" name="q" value="search keywords" id="q" class="text" />
+						<input type="submit" value="Search" class="button" />
+					</fieldset>
+					-->
+				</form>
+			{% endblock %}
+		</div>
+	</div> 
+</div>
+<div id="leftcol">Left Section</div>
+<div id="rightcol">
+	{% block sidebar %}
+	<ul>
+		<li>
+			<h2>Quote of the day</h2>
+			<p>{{quote}}</p>
+		</li>
+		<li>
+			<h2>Recent Posts</h2>
+			<ul>							
+				<li><a href="{% url PostHandler %}?PostId={{post.key}}">{{post.Title}}</a></li>		 
+				<li><a href="#">Pellentesque morbi sit veroeros</a></li>
+				<li><a href="#">Magna interdum donec pede</a></li>
+				<li><a href="#">Nisl gravida iaculis auctor vitae</a></li>
+				<li><a href="#">Bibendum sit amet mauris cras</a></li>
+				<li><a href="#">Adipiscing libero et risus donec</a></li>
+				<li><a href="#">Venenatis porttitor morbi quam</a></li>
+			</ul>
+		</li>
+	</ul>
+	{% endblock %}
+</div>
+<div id="content">
+	{% block content %}
+	Main Pane
+	{% endblock %}
+</div>
+<div id="footer">Footer Section</div>
+</body>
+</html>

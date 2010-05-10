@@ -1,0 +1,38 @@
+{% extends base %}
+
+{% block content %} 
+<p class="ui-widget">
+	<h2>Што би сакале да додадете или изментите на нашата страница?</h2>
+</p>
+<div class="ui-corner-all" style="border: 1px solid black; width: 420px; padding-left: 10px; margin-left: auto; margin-right: auto;">
+	<div style="border-bottom: 1px double blue;"> <h3><i>Додади Желба</i></h3></div>	
+	<form method="post" action="{% url WishListHandler %}"> 
+		<textarea id="elm1" name="wish" rows="5" cols="60" style="width:400px;height: 50px; border: 2px solid;"> </textarea> 
+		<input type="hidden" name="op" value="add"></input>
+		<br /> 
+		<input type="submit"  value="Submit" />  
+	</form>
+	
+	
+</div>
+
+<div class="ui-widget">
+<div><h2>Wish List</h2></div>
+	<table>
+	{% for w in wishlist %}
+		<tr>
+			<td>{{forloop.counter}}.</td>
+			<td style="width: 150px">
+				By&nbsp;{%if w.Owner%} {{w.Owner.Name}} {{w.Owner.Surname}} {% else %} Anonymous{% endif %}
+				on {{w.DateAdded|date:"y/M/d"}}
+			</td>
+			
+			<td style="width: 400px">{{w.Wish}}</td>
+			{%if current_user.IsAdmin %}
+			<td><a href="/WishList?op=del&key={{w.key}}">Delete</a></td>
+			{%endif%}
+		</tr>
+	{%endfor%}
+	</table>
+</div>
+{% endblock %}

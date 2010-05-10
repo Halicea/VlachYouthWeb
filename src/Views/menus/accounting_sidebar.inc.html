@@ -1,0 +1,66 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div>
+	<div class="ui-corner-all ui-widget-content" style="padding: 5px; margin-bottom: 5px">
+		    <h2>Balance</h2>
+			{% for acc in current_user.owner_accounts %}				
+			<div>
+				<b>Account: <a href="{% url AccountHandler %}?key={{acc.key}}" style="color: blue;">{{acc.AccountNumber}}</a></b> 
+				Balance:{{acc.Balance}}	<hr></hr>			
+			</div>
+			{% endfor %}
+			<script type="text/javascript">
+				var newAccount = null;
+				$(function(){
+					newAccount = $('#divNewAccount').dialog({hidden:true});
+					$('#btnNewAccount').click(function(evnt){
+						evnt.preventDefault();
+						newAccount.dialog();
+					});
+				});
+			</script>
+			<input type="button" id="btnNewAccount" value="New Account"></input>
+			<div id="divNewAccount" style="display: none">
+				<div><h2>New Account</h2></div>
+				<div>
+					<form action="" method="post" class="ui-widget">
+						<input type="hidden" name="op" value="new"></input>
+						{{new_account}}
+						{%comment%}
+						<p>Account Number:<input name="AccountNumber" id="txtAccountNumber"></input></p>
+						<p>Bank Name:<input name="BankName" id="txtBankName"></input></p>
+						<p>Balance:<input name="Balance" id="txtBalance"></input></p>
+						{%endcomment%}
+						<input type="submit" value="Create"></input>
+					</form>
+				</div>
+			</div>
+	</div>
+	{% if current_user.owner_financial_cards.get %}
+	<div class="ui-corner-all ui-widget-content" style="padding: 5px; margin-bottom: 5px">
+		<h2>Financial Cards</h2>
+		{%for c in current_user.owner_financial_cards %}
+		<div>
+			<a href="{% url FinancialCardHandler %}?UserKey={{c.ReferentEntity.key}}" > {{c.ReferentEntity.Name}} {{c.ReferentEntity.Surname}} </a> 
+		</div> 
+		{%endfor%}		
+	</div>
+	{%endif%}
+	<div class="ui-corner-all ui-widget-content" style="padding: 5px; margin-bottom: 5px">
+		<h2>Links</h2>		
+			<a href="{% url TransactionHandler %}" style="font-size: 18px; font-style: oblique">
+				<div class="" style="">
+				 Transaction Search
+				</div>
+			</a>
+			<a href="{% url TransactionHandler %}?op=new" style="font-size: 18px; font-style: oblique">
+				<div class="" style="">
+				  New Transaction
+				</div>
+			</a> 
+			<a href="{% url FinancialCardHandler %}" style="font-size: 18px; font-style: oblique">
+				<div class="" style="">
+				 Financial Cards
+				</div>
+			</a>
+	</div>
+</div>

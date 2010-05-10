@@ -1,0 +1,40 @@
+{% extends blog_base %}
+
+{% block content %}
+	{% if post %}
+		{% include 'blocks/post.inc.html' %}
+		{% if comments %}
+			{% for comment in comments %}
+			<div class="post">
+				<div class="">
+					{{comment.Entry}}
+				</div>
+				<div class="meta">
+					<p class="credit">Comment by <a href="/profiles/{{comment.Creator.Name}}">{{comment.Creator.Name}}</a> on {{comment.DateCreated}}</p>
+				</div>
+			</div>
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+	
+		<!-- Comments box -->
+		<!-- TinyMCE --> 
+		<script type="text/javascript" src="/jscripts/tiny_mce/tiny_mce.js"></script> 
+		<script type="text/javascript"> 
+			tinyMCE.init({
+				mode : "textareas",
+				theme : "simple"
+			});
+		</script> 
+		<!-- /TinyMCE --> 	
+		<form method="get" action="/AddComment"> 
+			<h3><i>Add Comment</i></h3>
+			<textarea id="elm1" name="Comment" rows="5" cols="60" style="width:400px;height: 20px"> 
+			</textarea> 
+			<br /> 
+			<input type="hidden" name="PostId" value="{{post.key}}">
+			<input type="submit"  value="Submit" /> 
+			<input type="reset" value="Reset" /> 
+		</form> 
+ 
+{% endblock %}

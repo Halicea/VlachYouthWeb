@@ -1,0 +1,57 @@
+{% extends accounting_base  %}
+
+{% block content %}
+<form action="{% url TransactionTypeHandler %}"  method="get" accept-charset="utf-8">
+<table width="450px" border="1">
+	<tr>
+		<td  bgcolor="#0000a0">
+			<input type="text" name="Code" style="width:68px"></input>
+		</td>
+		<td>
+			<select name="TypeGroup">
+				{% for gr in transaction_type_groups %}
+					<option value="{{gr.key}}"  title="{{gr.Description}}">{{gr.Code}}</option>	
+				{% endfor %}
+			</select>
+		</td>
+		<td>
+			<input type="text" name="Description" style="width: 306px"></input>
+		</td>
+		<td>
+			<input type="submit" align="right" value="Save" />
+		</td>
+	</tr>
+    <tr>
+    	<th>
+    		Type Code
+    	</th>
+        <th width="70px">
+        	Group Code
+        </th>        <th width="350px">
+        	Group Description
+        </th>
+		<th width="50px">
+			Action
+		</th>
+    </tr>
+
+	{% for tt in transaction_types %}
+    <tr>
+        <td>
+        	{{tt.Code}}
+        </td>
+        <td>
+        	{{tt.TypeGroup.Code}}
+        </td>
+        <td>
+        	{{tt.Description}}
+        </td>
+		<td>
+			<a href="TransactionType?action=delete&key={{tt.key}}">Delete</a>
+		</td>
+    </tr>
+	{%endfor%}
+</table>
+</form>
+{% endblock %}
+

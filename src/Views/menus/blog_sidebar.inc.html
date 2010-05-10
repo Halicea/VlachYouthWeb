@@ -1,0 +1,44 @@
+<div class="ui-widget ui-corner-all">
+	<div >
+			<div class="ui-widget-header ui-corner-top" style="text-align: center;">Recent Posts</div>
+			<div class="ui-corner-bottom ui-widget-content" style="min-height: 100px; padding: 5px">
+				{% if last_posted %}
+				{% for post in last_posted %}
+					<p><a href="{% url PostHandler %}?key={{post.key}}">{{post.Title}}</a></p> 
+				{% endfor %}
+				{% endif %}
+			</div>
+	</div>
+	<div>
+			<div class="ui-widget-header ui-corner-top" style="text-align: center;">
+				Currently active visitors 
+				{% if cvn %} &nbsp;:{{cvn}} {%endif%}
+				
+			</div>
+			<div class="ui-corner-bottom ui-widget-content" style="min-height: 100px; padding: 5px">
+				{% if current_visitors %}
+				{% for visitor in current_visitors %}
+					<!--  <a href="{% url CommentHandler %}s?postKey={{post.key}}">{{post.Title}}</a> -->
+					<p><a href="{% url CommentHandler %}?postKey={{post.key}}">{{post.Title}}</a></p> 
+				{% endfor %}
+				{% endif %}
+			</div>
+	</div>
+	<div>
+			<div class="ui-widget-header ui-corner-top" style="text-align: center;">Most popular tags</div>
+			<div class="ui-corner-bottom ui-widget-content" style="min-height: 100px; padding: 5px">
+				{% if tag_list %}
+				{% for visitor in tag_list %}
+					<!--  <a href="{% url CommentHandler %}s?postKey={{post.key}}">{{post.Title}}</a> -->
+					<p><a href="{% url CommentHandler %}?postKey={{post.key}}">{{tag.Name}}</a></p> 
+				{% endfor %}
+				{% endif %}
+			</div>
+	</div>
+	<div>
+			<div class="ui-widget-header ui-corner-top" style="text-align: center;">Social</div>
+			<div class="ui-corner-bottom ui-widget-content" style="min-height: 100px; padding: 5px">
+				{% include blMembersGadget %}
+			</div>
+	</div>
+</div>

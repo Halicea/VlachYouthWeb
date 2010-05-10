@@ -1,0 +1,60 @@
+{% extends base %}
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+$(function(){
+	$('#lnkSearchWordDialog').click(function(evt){
+		evt.preventDefault();
+		$('#searchWordDialog').dialog( {modal: true});
+	});
+	$('#btnSave').click(function(evt){
+		evt.preventDefault();
+		$.ajax({
+			url: "",
+			data: "ajax=True&value="+$('#txtSearchWord').attr('value'),
+			dataType: "text",
+			success : function(msg){
+				$('#divWordResults').html(msg);
+			}
+		});
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+<form action="" method="get">
+	Add New: <a href="" id="lnkSearchWordDialog">Search Primary Language Word</a><br></br>
+	<input type="hidden" name="vitem"></input>
+	<input type="text" name="value"></input>
+	<input type="text" name="description"></input>
+	<input type="hidden" name="op"></input>
+	<input type="submit" id="btnSave" value="Save"></input>
+	
+	<hr></hr>
+	<div id="divResults">
+		{% if WordResults %}
+		<table class="resultGrid">
+			{% for item in wordResults %}
+			<tr>
+				<td>
+					{{item.Value}}
+				</td>
+				<td>
+					{{item.Description}}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+				No results to display
+		{%endif%}
+	</div>
+	
+	<div id="searchWordDialog" style="display:none">
+		Search:<input type="text" id="txtSearchWord"></input>
+		<input type="button" id="btnSearchPatient" value="Search"></input>
+		{% include '../../blocks/search_word.inc.html' %}
+	</div>
+</form>
+
+{% endblock %}

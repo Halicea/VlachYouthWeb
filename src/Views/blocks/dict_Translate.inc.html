@@ -1,0 +1,19 @@
+<div id="divWordResults">
+	{% if WordResults %}
+	<table class="resultGrid">
+		
+		{% for item in WordResults %}
+		<tr>
+			<td>
+				{{item.Value}}
+			</td>
+			<td>
+				{{item.Description}}
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+	No results to display	
+	{%endif%}
+</div>

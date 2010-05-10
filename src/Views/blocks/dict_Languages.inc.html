@@ -1,0 +1,20 @@
+
+<table class="resultGrid">
+	{% if LanguageResults %}
+	{% for item in LanguageResults %}
+	<tr>
+		<td>
+			<a href="{% url LanguagesHandler %}/{{item.LanguageCode}}">{{item.LanguageName}}</a>
+		</td>
+		<td>
+			{{item.LanguageCode}}
+		</td>
+		<td>
+			<a href="{% url LanguagesHandler %}?op=del&languageCode={{item.LanguageCode}}">Delete</a>
+		</td>
+	</tr>
+	{% endfor %}
+	{% else %}
+		No results to display	
+	{%endif%}
+</table>

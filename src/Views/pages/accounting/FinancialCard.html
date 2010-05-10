@@ -1,0 +1,40 @@
+{% extends accounting_base %}
+{% block title %} Financial Card for {{financialCard.ReferentEntity.Name}} {{financialCard.ReferentEntity.Surname}} {% endblock %}
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker();
+    });
+</script>
+{% endblock %}
+{% block content %}
+<div id="divUsers">
+    <form name="usersForm">
+        <select id="selUsers" name="UserKey" onchange="document.usersForm.submit()">
+        	<option>--Select Item--</option>
+            {% for usr in allUsers %}
+			<option value="{{usr.key}}" {%ifequal refUser.key usr.key %}selected="selected"{%endifequal%} >{{usr.Name}} {{usr.Surname}}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+<div id="divBalance" class="ui-widget-content ui-corner-all">
+    <form>
+		<input type="hidden" name="op" value="recalc" ></input>
+		<input type="hidden" name="UserKey" value="{{refUser.key}}" ></input>
+		<h3>Balance: <b>{{financialCard.Balance}}<b></h3>
+		<input type="submit" value="Reevaluate"></input>
+		<hr/>
+	</form>
+</div>
+<div>
+    Search:
+    <form action="" method="post">
+        <input type="hidden" name="UserKey" value={{ref_user.key}} />From:<input type="text" class="datepicker" name="From" id="dFrom"/> &nbsp;&nbsp;&nbsp; 
+        To:<input type="text" name="To" class="datepicker" id="dTo"/><input type="Submit" value="Search" />
+    </form>
+</div>{% if transaction_results %}
+{% include mnTransactionList %}
+{% endif %}
+{%endblock%}

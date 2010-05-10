@@ -1,0 +1,22 @@
+{% extends base %}
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+$(function(){
+	$('#frmNewLanguage').ajaxForm({target: '#divResults'});
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<form id="frmNewLanguage" action="" method="get">
+	Add New: <br></br>
+	<input type="text" name="languageName" id="languageName"></input>
+	<input type="text" name="languageCode" id="languageCode" maxlength="4"></input>
+	<input type="hidden" value="add" name="op"  id="op"></input>
+	<input type="submit" value="add"></input>	
+</form>
+<div id="divResults">
+	{% include blLanguages %}
+</div>
+{% endblock %}

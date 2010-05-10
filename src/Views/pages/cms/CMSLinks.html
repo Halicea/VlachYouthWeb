@@ -1,0 +1,50 @@
+{%extends cms_base %}
+{% block content %}
+	Add New:
+	<form action="" method="post">
+		<input type="hidden" name="op" value="add"></input>
+addressName, name, parent, order, content	<br></br>	
+		Address Name:<input type="text" name="addressName"></input><br></br>
+    	Name :<input type="text" name="name"></input><br></br>
+    	Parrent Link:
+    	<ul><li><input type="radio" name="parentLink" value="">Root
+	    	<ul>
+				{%for item in cmsLinks.items%}
+					<li><input type="radio" name="parentLink" value="{{item.0.key}}">  <a href="/cms/pages/{{item.0.AddressName}}">{{item.0.Name}}</a>
+					<ul>
+					{% for item1 in item.1.items %}
+						<li>
+						<input type="radio" name="parentLink" value="{{item1.0.key}}">  <a href="/cms/pages/{{item.0.AddressName}}/{{item1.0.AddressName}}">{{item1.0.Name}}</a>
+						<ul>
+						{% for item2 in item1.1.items %}
+							<li>
+							<input type="radio" name="parentLink" value="{{item2.0.key}}">  <a href="/cms/pages/{{item.0.AddressName}}/{{item1.0.AddressName}}/{{item2.0.AddressName}}">{{item2.0.Name}}</a>
+							<ul>
+							{% for item3 in item2.1.items %}
+								<li>
+								<input type="radio" name="parentLink" value="{{item3.0.key}}">  <a href="/cms/pages/{{item.0.AddressName}}/{{item1.0.AddressName}}/{{item2.0.AddressName}}/{{item3.0.AddressName}}">{{item3.0.Name}}</a>
+								</li>
+							{% endfor %}
+							</ul>
+							</li>
+						{% endfor %}
+						</ul>
+						</li>
+					{%endfor%}
+					</ul>
+					</li>
+				{%endfor%}
+			</ul>
+		</li>
+		</ul><br></br>
+    	Order: <select name="order"><option>1</option><option>2</option><option>3</option><option>4</option></select><br></br>
+    	
+    	Content: <select name="content">
+    				{% for cont in  contents %}
+    				<option value="{{cont.key}}">{{cont.Title}}</option>
+    				{% endfor %}
+    			</select>
+    			<br></br>
+    	<input type="submit" value="Save"></input>
+	</form>
+{% endblock %}

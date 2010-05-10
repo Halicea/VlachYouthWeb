@@ -1,0 +1,23 @@
+{% extends base %}
+
+{% block content %} 
+
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+$(function(){
+	$('.collapsible').click(function(){
+		 var o = $(this);
+		 o.next('div').toggle('fast');
+	});
+});
+
+</script>
+
+{%endblock %}
+<div style="widht=500px; height:500px">
+	<div class="collapsible ui-widget-header ui-corner-top">header</div>
+	<div class="ui-corner-bottom ui-widget-content" style="height: 100px">
+	</div>
+</div>
+{% endblock %}

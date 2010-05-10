@@ -1,0 +1,26 @@
+application: vlachyouth
+version: 4
+runtime: python
+api_version: 1
+
+handlers:
+- url: /styles
+  static_dir: staticData/styles
+  
+- url: /styles/images
+  static_dir: staticData/styles/images
+
+- url: /images
+  static_dir: staticData/images
+  
+- url: /jscripts
+  static_dir: staticData/jscripts
+  
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
+  
+- url: /.*
+  script: handlerMap.py
+  
+  

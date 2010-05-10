@@ -1,0 +1,50 @@
+{% extends '../../bases/base.html' %}
+{% block scripts %}
+{{block.super}}
+<script type="text/javascript">
+$(function(){
+$/*('#frmSearchForm').ajaxForm({
+	targed:	'#divResults',
+	beforeSubmit: submitStart(formData, jqForm, options),
+	afterSubmit: submitEnd(responseText, statusText)
+});*/
+$('').click(function(){
+	$.ajax({
+		type:"GET"
+		dataType: "html",
+		url: ""
+		data: "fromL="+$('#fromL').attr("val")+"&"+
+		 	  "toL="+$('#toL').attr("val")+"&"+
+		      "searchItem="+$('#searchItem').attr("val"),
+		sucess: function(msg){
+			$('#divResults').html(msg);
+		}
+	});
+});
+function submitStart((formData, jqForm, options){
+	alert('starting:\n'+formData);
+}
+function submitEnd(responseText, statusText){
+	alert(responseText+"\n\n"+statusText);	
+}
+});
+</script>
+{% endblock %}
+{% block content %}
+<form action="" id="frmSearchForm" method="get">
+	From <select id="fromL" name="fromL">
+			{% for lang in languages %}
+			<option value="{{lang.LanguageCode}}">{{lang.LanguageName}}</option>
+			{% endfor %}
+		 </select>
+	To   <select id="toL" name="toL">
+			{% for lang in languages %}
+			<option value="{{lang.LanguageCode}}">{{lang.LanguageName}}</option>
+			{% endfor %}
+		 </select>
+	<input type="text" id="searchItem" name="searchItem"></input>
+	<input type="submit" id="btnSearch" value="Search"></input>	
+	<hr></hr>
+</form>
+{% include blTranslate %}
+{% endblock %}

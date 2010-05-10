@@ -1,0 +1,8 @@
+<menu>
+	<MenuItem><a href='{% url HomeHandler %}'>Home</a></MenuItem>
+	<MenuItem><a href='{% url TranslateHandler %}'>Dictionary</a></MenuItem>
+	<MenuItem><a href="{% url AboutHandler %}">About</a></MenuItem>
+	<MenuItem><a href="{% url LinksHandler %}">Links</a></MenuItem>
+	<MenuItem><a href="{% url WishListHandler %}">Wish List</a></MenuItem>
+	<MenuItem><a href="{% url ContactHandler %}">Contact</a></MenuItem>
+</menu>

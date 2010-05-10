@@ -1,0 +1,13 @@
+{%extends blog_base %}
+
+{%block content%}
+{%if link %}
+	<div class="ui-widget ui-corner-all" style="border: solid; color: black;">
+   <h1>{{link.Content.Title}}</h1>
+   <hr></hr>
+   <div>
+   		{{link.Content.Content}}
+   </div>
+   </div>
+{%endif%}
+{%endblock %}
