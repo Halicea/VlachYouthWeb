@@ -5,7 +5,7 @@
 dev_appserver.py src --port=8082</command>
 <URL id="449a3504-4b67-4f6a-a0ee-d50ee4276490" idref="cfb174a0-9385-401e-8477-730e3f3068f9" keyboard_shortcut="" name="live">
 http://vlachyouth.appspot.com</URL>
-<command cwd="" doNotOpenOutputWindow="0" env="" id="6462c182-8e9f-4ca6-af32-ed0b2d1bd189" idref="cfb174a0-9385-401e-8477-730e3f3068f9" insertOutput="0" keyboard_shortcut="" name="run_console" operateOnSelection="0" parseOutput="0" parseRegex="" runIn="new-console" showParsedOutputList="0">
+<command cwd="%p" doNotOpenOutputWindow="0" env="" id="6462c182-8e9f-4ca6-af32-ed0b2d1bd189" idref="cfb174a0-9385-401e-8477-730e3f3068f9" insertOutput="0" keyboard_shortcut="" name="run_console" operateOnSelection="0" parseOutput="0" parseRegex="" runIn="new-console" showParsedOutputList="0">
 dev_appserver.py src --por=8082</command>
 <URL id="762a6616-e540-4738-b8ed-4c8cdec92d47" idref="cfb174a0-9385-401e-8477-730e3f3068f9" keyboard_shortcut="" name="local">
 http://localhost:8082</URL>
@@ -45,5 +45,29 @@ appcfg.py src update</command>
   <string id="perlExtraPaths"></string>
   <boolean id="perl_lintOption_includeCurrentDirForLinter">1</boolean>
   <string id="pythonExtraPaths">C:\Python25\Lib\site-packages;C:\Program Files\Google\google_appengine\lib\django;C:\Program Files\Google\google_appengine\lib\webob;C:\Program Files\Google\google_appengine\lib\yaml\lib;C:\Program Files\Google\google_appengine;C:\Users\KMihajlov\MyProjects\Python\VlachYouthWeb\src</string>
+</preference-set>
+<preference-set idref="e5003e27-e553-4734-9c0c-ab6392482387/src/handlerMap.py">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <string id="documentRoot"></string>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">src/handlerMap.py</string>
+  <string id="getparams"></string>
+  <string id="language">Python</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">Project</string>
 </preference-set>
 </project>
